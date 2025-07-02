@@ -14,7 +14,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 	 *
 	 * @var string
 	 */
-	protected $signature = 'scaffy:generate {--table=} {--schema=} {--ouput=} {--with-relations}';
+	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {--with-relations}';
 
 	/**
 	 * The console command description.
@@ -49,7 +49,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 		$outputDir = $this->option('output');
 
 		try {
-			if ($table) {
+			if ($table) {dev-main
 				$this->info("Generating model for table: {$table}");
 				$this->generateModel($table, $schema);
 			} else {
