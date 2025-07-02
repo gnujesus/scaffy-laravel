@@ -1,0 +1,23 @@
+{
+    "name": "gnu/scaffy-laravel",
+    "description": "Laravel adapters for the Scaffy/Core package.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Gnu\\Scaffy\\Laravel\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gnujesus",
+            "email": "jotamartinezd@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "gnu/scaffy-core": "^1.1",
+        "illuminate/support": "^12.0",
+        "illuminate/console": "^12.19"
+    }
+}
