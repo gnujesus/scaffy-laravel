@@ -49,7 +49,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 		$outputDir = $this->option('output');
 
 		try {
-			if ($table) {dev-main
+			if ($table) {
 				$this->info("Generating model for table: {$table}");
 				$this->generateModel($table, $schema);
 			} else {
