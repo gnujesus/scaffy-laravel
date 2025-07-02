@@ -16,7 +16,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "gnu/scaffy-core": "^1.1",
+        "gnu/scaffy-core": "dev-main",
         "illuminate/support": "^12.0",
         "illuminate/console": "^12.19"
     }

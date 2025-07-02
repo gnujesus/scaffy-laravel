@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46e2eb329c1ac9bdf8ef1a478d4e01df",
+    "content-hash": "6bf956f40f6899f3358000b87276338d",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -167,18 +167,19 @@
         },
         {
             "name": "gnu/scaffy-core",
-            "version": "v1.1.1",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gnujesus/scaffy-core.git",
-                "reference": "942b993f5ec27f0795432cd69457ff052471b708"
+                "reference": "0f25952f06489c3eff869c96055f809ec1626e1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gnujesus/scaffy-core/zipball/942b993f5ec27f0795432cd69457ff052471b708",
-                "reference": "942b993f5ec27f0795432cd69457ff052471b708",
+                "url": "https://api.github.com/repos/gnujesus/scaffy-core/zipball/0f25952f06489c3eff869c96055f809ec1626e1b",
+                "reference": "0f25952f06489c3eff869c96055f809ec1626e1b",
                 "shasum": ""
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -198,9 +199,9 @@
             "description": "A package that generated models based on your database entities. Works for MS SQL Server, MySql & PostgreSql.",
             "support": {
                 "issues": "https://github.com/gnujesus/scaffy-core/issues",
-                "source": "https://github.com/gnujesus/scaffy-core/tree/v1.1.1"
+                "source": "https://github.com/gnujesus/scaffy-core/tree/main"
             },
-            "time": "2025-07-02T19:00:46+00:00"
+            "time": "2025-07-02T19:51:18+00:00"
         },
         {
             "name": "illuminate/bus",
@@ -2463,7 +2464,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "gnu/scaffy-core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},
