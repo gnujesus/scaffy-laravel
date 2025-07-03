@@ -1,20 +1,46 @@
 <?php
 
-namespace Gnu\Scaffy\Laravel;
+/**
+ * -----------------------------------------------------------------------------
+ * 
+ * Disclaimer: This method requires to write the schema to prevent mass generation
+ * of a ridiculus amount of tables, for those databases that are huge. You'll rarely need 
+ * that many models at one (we're talking about a hundred to a thousand tables). For said
+ * reasons, the user is required to know the schema of the tables he wants to import.
+ *
+ * Author: GNU Jesus <jotamartinezd@gmail.com>
+ * Created: July 3, 2025
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+namespace Gnu\Scaffy\Laravel\Adapters;
 
 use Gnu\Scaffy\Core\Ports\FrameworkPort;
 use Gnu\Scaffy\Core\Helpers\IOHelper;
+use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
+
 class LaravelAdapter extends Command implements FrameworkPort
 {
+
+	// TODO: Dependency Injection
+
+	private $dbAdapter;
+
+	public function __construct(DatabasePort $databaseAdapter)
+	{
+		$this->dbAdapter = $databaseAdapter;
+	}
+
 	/**
 	 * The name and signature of the console command.
 	 *
 	 * @var string
 	 */
-	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {--with-relations}';
+	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {--with-relations} {--database}';
 
 	/**
 	 * The console command description.
@@ -68,7 +94,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	function getAllTables(string $schema): array
 	{
-		$query = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = ? AND TABLE_TYPE = 'BASE TABLE'";
+		$query = $this->dbAdapter->selectAllTablesFromSchema();
 		$results = DB::select($query, [$schema]);
 
 		// Let's see what we get back
@@ -85,10 +111,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	function getTableColumns(string $tableName, string $schema): array
 	{
-		$query = "SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE
-              FROM INFORMATION_SCHEMA.COLUMNS
-              WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?
-              ORDER BY ORDINAL_POSITION";
+		$query = $this->dbAdapter->selectAllTableColumnsFromSchema();
 
 		$results = DB::select($query, [$tableName, $schema]);
 
