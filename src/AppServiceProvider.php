@@ -30,10 +30,6 @@ class AppServiceProvider extends ServiceProvider
 	{
 		$config = $this->app->make(Config::class);
 
-		$this->commands([
-			LaravelAdapter::class,
-		]);
-
 		$this->app->bind(DatabasePort::class, function ($app) use ($config) {
 			$driver = $config->get("database.default");
 
@@ -42,5 +38,9 @@ class AppServiceProvider extends ServiceProvider
 				default =>  throw new \Exception("Unsupported DB Driver: {$driver}")
 			};
 		});
+
+		$this->commands([
+			LaravelAdapter::class,
+		]);
 	}
 }
