@@ -20,6 +20,7 @@ use Gnu\Scaffy\Core\Ports\FrameworkPort;
 use Gnu\Scaffy\Core\Helpers\IOHelper;
 use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 use Illuminate\Console\Command;
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 
 
@@ -30,9 +31,11 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	private $dbAdapter;
 
-	public function __construct(DatabasePort $databaseAdapter)
+	public function __construct(Container $app)
 	{
-		$this->dbAdapter = $databaseAdapter;
+		parent::__construct();
+
+		$this->dbAdapter = $app->make(DatabasePort::class);
 	}
 
 	/**
