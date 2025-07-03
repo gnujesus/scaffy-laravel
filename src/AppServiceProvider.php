@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Config\Repository as Config;
 use Gnu\Scaffy\Laravel\Adapters\LaravelAdapter;
 use Gnu\Scaffy\Laravel\Ports\DatabasePort;
-use Gnu\Scaffy\Laravel\Ports\MsSqlServerAdapter;
+use Gnu\Scaffy\Laravel\Adapters\MsSqlServerAdapter;
 
 class AppServiceProvider extends ServiceProvider
 {

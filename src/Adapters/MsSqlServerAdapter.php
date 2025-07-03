@@ -1,6 +1,6 @@
 <?php
 
-namespace Gnu\Scaffy\Laravel\Ports;
+namespace Gnu\Scaffy\Laravel\Adapters;
 
 use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 
