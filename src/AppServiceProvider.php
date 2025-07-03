@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
 			$driver = $config->get("database.default");
 
 			match ($driver) {
-				'sqlsrv' => new MsSqlServerAdapter(),
+				'sqlsrv' => MsSqlServerAdapter::class,
 				default =>  throw new \Exception("Unsupported DB Driver: {$driver}")
 			};
 		});
