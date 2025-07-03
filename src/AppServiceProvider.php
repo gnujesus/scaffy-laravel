@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->bind(DatabasePort::class, function ($app) use ($config) {
 			$driver = $config->get("database.default");
 
-			match ($driver) {
+			return match ($driver) {
 				'sqlsrv' => MsSqlServerAdapter::class,
 				default =>  throw new \Exception("Unsupported DB Driver: {$driver}")
 			};

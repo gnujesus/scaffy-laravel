@@ -34,7 +34,6 @@ class LaravelAdapter extends Command implements FrameworkPort
 	public function __construct(Container $app)
 	{
 		parent::__construct();
-
 		$this->dbAdapter = $app->make(DatabasePort::class);
 	}
 
