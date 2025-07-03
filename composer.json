@@ -23,7 +23,7 @@
     "extra": {
       "laravel": {
         "providers": [
-          "Gnu\\Scaffy\\Laravel\\ScaffyServiceProvider"
+          "Gnu\\Scaffy\\Laravel\\AppServiceProvider"
           ]
         }
     }
