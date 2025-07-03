@@ -2,14 +2,13 @@
 
 namespace Gnu\Scaffy\Laravel;
 
-
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Config\Repository as Config;
 use Gnu\Scaffy\Laravel\Adapters\LaravelAdapter;
 use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 use Gnu\Scaffy\Laravel\Ports\MsSqlServerAdapter;
 
-class ScaffyServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
 	public $driver;
 
