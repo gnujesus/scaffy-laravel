@@ -10,23 +10,36 @@ use Gnu\Scaffy\Laravel\Ports\MsSqlServerAdapter;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+	/*
+ *
+ * NOTE: Quick reminder that this is wrong.
+ *
+ */
+
+	/*
 	public $driver;
 
 	public function __construct(Config $config)
 	{
 		$this->driver = $config->get('database.default');
 	}
+	*/
 
 	public function register()
 	{
+		$config = $this->app->make(Config::class);
+
 		$this->commands([
 			LaravelAdapter::class,
 		]);
 
-		$this->app->bind(DatabasePort::class, function ($app) {
-			match ($this->driver) {
+		$this->app->bind(DatabasePort::class, function ($app) use ($config) {
+			$driver = $config->get("database.default");
+
+			match ($driver) {
 				'sqlsrv' => new MsSqlServerAdapter(),
-				default =>  throw new \Exception("Unsupported DB Driver: {$this->driver}")
+				default =>  throw new \Exception("Unsupported DB Driver: {$driver}")
 			};
 		});
 	}
