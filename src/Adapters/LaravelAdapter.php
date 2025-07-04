@@ -32,7 +32,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	private $dbAdapter;
 
-	public function __construct(Container $app, string $schema = "")
+	public function __construct(Container $app)
 	{
 		parent::__construct();
 		$this->dbAdapter = $app->make(DatabasePort::class);
@@ -43,7 +43,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 	 *
 	 * @var string
 	 */
-	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {--with-relations} {--database}';
+	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {-wr|--with-relations} {-d|--database}';
 
 	/**
 	 * The console command description.
@@ -74,7 +74,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 	{
 		$table = $this->option('table');
 		$withRelations = $this->option('with-relations');
-		$schema = $this->option('schema');
+		$schema = $this->option('schema') ?? '';
 		$outputDir = $this->option('output');
 
 		try {
