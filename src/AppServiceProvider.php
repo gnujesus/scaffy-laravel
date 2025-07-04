@@ -2,6 +2,7 @@
 
 namespace Gnu\Scaffy\Laravel;
 
+use Gnu\Scaffy\Laravel\Adapters\MySqlAdapter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Config\Repository as Config;
 use Gnu\Scaffy\Laravel\Adapters\LaravelAdapter;
@@ -32,10 +33,12 @@ class AppServiceProvider extends ServiceProvider
 
 		$this->app->bind(DatabasePort::class, function ($app) use ($config) {
 			$driver = $config->get("database.default");
+			$database = $config->get("database.connections.$driver.database");
 
 			return match ($driver) {
 				// don't user MsSqlServerAdapter::class, this is a string
 				'sqlsrv' => new MsSqlServerAdapter(),
+				'mysql' => new MySqlAdapter($database),
 				default =>  throw new \Exception("Unsupported DB Driver: {$driver}")
 			};
 		});

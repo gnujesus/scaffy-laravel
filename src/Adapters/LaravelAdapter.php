@@ -22,6 +22,7 @@ use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Config\Repository as Config;
 
 
 class LaravelAdapter extends Command implements FrameworkPort
@@ -31,7 +32,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	private $dbAdapter;
 
-	public function __construct(Container $app)
+	public function __construct(Container $app, string $schema = "")
 	{
 		parent::__construct();
 		$this->dbAdapter = $app->make(DatabasePort::class);
@@ -96,28 +97,34 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	function getAllTables(string $schema): array
 	{
-		$query = $this->dbAdapter->selectAllTablesFromSchema();
-		$results = DB::select($query, [$schema]);
+		try {
+			$results = $this->dbAdapter->selectAllTablesFromSchema($schema);
 
-		// Let's see what we get back
-		$this->info("Raw results:");
-		foreach ($results as $result) {
-			$this->line("Table: " . $result->TABLE_NAME);
+			// Let's see what we get back
+			$this->info("Raw results:");
+			foreach ($results as $result) {
+				$this->line("Table: " . $result->TABLE_NAME);
+			}
+
+			// Return just the table names
+			return array_map(function ($table) {
+				return $table->TABLE_NAME;
+			}, $results);
+		} catch (\Exception $e) {
+			$this->error($e->getMessage());
+			exit;
 		}
-
-		// Return just the table names
-		return array_map(function ($table) {
-			return $table->TABLE_NAME;
-		}, $results);
 	}
 
 	function getTableColumns(string $tableName, string $schema): array
 	{
-		$query = $this->dbAdapter->selectAllTableColumnsFromSchema();
-
-		$results = DB::select($query, [$tableName, $schema]);
-
-		return $results;
+		try {
+			$results = $this->dbAdapter->selectAllTableColumnsFromSchema($tableName, $schema);
+			return $results;
+		} catch (\Exception $e) {
+			$this->error($e->getMessage());
+			exit;
+		}
 	}
 
 	function generateModel(string $tableName, string $schema): bool

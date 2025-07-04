@@ -10,6 +10,6 @@ namespace Gnu\Scaffy\Laravel\Ports;
 
 interface DatabasePort
 {
-	function selectAllTablesFromSchema(): string;
-	function selectAllTableColumnsFromSchema(): string;
+	function selectAllTablesFromSchema(string $customSchema): array;
+	function selectAllTableColumnsFromSchema(string $tableName): array;
 }
