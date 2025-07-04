@@ -179,6 +179,12 @@ class LaravelAdapter extends Command implements FrameworkPort
 	{
 		$fillableString = "'" . implode("',\n        '", $fillable) . "'";
 
+		$dot = "";
+
+		if (!empty($schema) && isset($schema)) {
+			$dot = ".";
+		}
+
 		$content = "<?php
 
 namespace App\Models;
@@ -197,7 +203,7 @@ class {$modelName} extends Model
 
     public function getTable()
     {
-        return '{$schema}.{$tableName}';
+        return '{$schema}{$dot}{$tableName}';
     }
 }";
 
