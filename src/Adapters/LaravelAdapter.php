@@ -43,7 +43,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 	 *
 	 * @var string
 	 */
-	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {-wr|--with-relations} {-d|--database}';
+	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {-wr|--with-relations?} {-d|--database?}';
 
 	/**
 	 * The console command description.
