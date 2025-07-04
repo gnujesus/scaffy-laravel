@@ -43,7 +43,8 @@ class LaravelAdapter extends Command implements FrameworkPort
 	 *
 	 * @var string
 	 */
-	protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {--with-relations?} {--database?}';
+	/* protected $signature = 'scaffy:generate {--table=} {--schema=} {--output=} {--with-relations?} {--database?}'; */
+	protected $signature = 'scaffy:generate {--table=} {--schema=}';
 
 	/**
 	 * The console command description.
@@ -73,9 +74,9 @@ class LaravelAdapter extends Command implements FrameworkPort
 	public function handle()
 	{
 		$table = $this->option('table');
-		$withRelations = $this->option('with-relations');
+		/* $withRelations = $this->option('with-relations'); */
 		$schema = $this->option('schema') ?? '';
-		$outputDir = $this->option('output');
+		/* $outputDir = $this->option('output'); */
 
 		try {
 			if ($table) {
