@@ -83,7 +83,7 @@ class LaravelAdapter extends Command implements FrameworkPort
 				$this->info("Generating model for table: {$table}");
 				$this->generateModel($table, $schema);
 			} else {
-				$this->info("Generating models from all tables in Admission schema");
+				$this->info("Generating models from all tables");
 				$tables = $this->getAllTables($schema);
 				$this->info("Found " . count($tables) . " tables");
 
