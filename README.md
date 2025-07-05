@@ -7,7 +7,7 @@
 [![Downloads](https://img.shields.io/packagist/dt/gnu/scaffy-laravel.svg?style=flat-square)](https://packagist.org/packages/gnu/scaffy-laravel)
 
 
-**Scaffy Laravel** is a Laravel-specific adapter for the [Scaffy Core](https://github.com/your-org/scaffy-core) code generation system. It provides an Artisan command to generate Eloquent models directly from your database schema.
+**Scaffy Laravel** is a Laravel-specific adapter for the [Scaffy Core](https://github.com/gnujesus/scaffy-core) code generation system. It provides an Artisan command to generate Eloquent models directly from your database schema.
 
 ---
 
