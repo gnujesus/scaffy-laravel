@@ -17,7 +17,7 @@
 namespace Gnu\Scaffy\Laravel\Adapters;
 
 use Gnu\Scaffy\Core\Ports\FrameworkPort;
-use Gnu\Scaffy\Core\Helpers\IOHelper;
+use Gnu\Scaffy\Core\Helpers\IOHelperCOLUMN_NAME;
 use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
@@ -179,9 +179,15 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	function getFillableArray(array $columns): array
 	{
+		$isPsql = $this->dbAdapter instanceof PostgreSqlAdapter;
+
 		$fillable = [];
 
 		foreach ($columns as $column) {
+			if ($isPsql) {
+				$fillable[] = $column->column_name;
+				continue;
+			}
 			$fillable[] = $column->COLUMN_NAME;
 		}
 
