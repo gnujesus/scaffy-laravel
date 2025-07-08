@@ -22,7 +22,7 @@ class PostgreSqlAdapter extends BaseDatabaseAdapter implements DatabasePort
 
 		$schema = empty($customSchema) ? $this->defaultSchema : $customSchema;
 
-		$query = "SELECT table_name
+		$query = "SELECT *
 		FROM information_schema.tables
 		WHERE table_schema = ? 
 		AND table_type = 'BASE TABLE'";
