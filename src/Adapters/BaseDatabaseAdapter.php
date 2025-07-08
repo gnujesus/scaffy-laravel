@@ -50,4 +50,55 @@ class BaseDatabaseAdapter implements DatabasePort
 
 		return $results;
 	}
+
+	/* 
+	*
+	* Query to find relations between tables (explained)
+	*
+	
+	SELECT 
+	  kcu.table_name AS source_table,
+	  kcu.column_name AS source_column,
+	  ccu.table_name AS target_table,
+	  ccu.column_name AS target_column
+	FROM 
+	  information_schema.key_column_usage AS kcu
+	JOIN 
+	  information_schema.constraint_column_usage AS ccu
+	  ON kcu.constraint_name = ccu.constraint_name
+	  AND kcu.constraint_schema = ccu.constraint_schema
+	WHERE 
+	  kcu.constraint_name LIKE '%_foreign%';
+
+	*
+	* 1. Make the select that's going to create the resulting structure => source_table | source_column | target_table | target_column
+	* 2. Specify the table from which you're going to select and stabish an alias, in this case, kcu
+	* 3. Join with another table in which the same select is applied
+	* 4. Specify the conditions of the join (on, and)
+	* 5. Specify the where for the first select (step 1)
+	*
+	*
+	* Other queries
+	
+	SELECT 
+	  kcu.table_name AS source_table,
+	  kcu.column_name AS source_column,
+	  ccu.table_name AS target_table,
+	  ccu.column_name AS target_column
+
+	FROM 
+	  information_schema.key_column_usage AS kcu
+	JOIN 
+	  information_schema.constraint_column_usage AS ccu
+	  ON kcu.constraint_name = ccu.constraint_name
+	  AND kcu.constraint_schema = ccu.constraint_schema
+	WHERE 
+	  (kcu.constraint_name LIKE '%_foreign%' 
+	  	OR kcu.constraint_name  LIKE '%unique%') 
+	  AND 
+	  (kcu.column_name LIKE '%id%' 
+		AND ccu.column_name LIKE '%id%');
+
+	*
+	*/
 }
