@@ -2,12 +2,13 @@
 
 namespace Gnu\Scaffy\Laravel;
 
-use Gnu\Scaffy\Laravel\Adapters\MySqlAdapter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Config\Repository as Config;
 use Gnu\Scaffy\Laravel\Adapters\LaravelAdapter;
 use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 use Gnu\Scaffy\Laravel\Adapters\MsSqlServerAdapter;
+use Gnu\Scaffy\Laravel\Adapters\MySqlAdapter;
+use Gnu\Scaffy\Laravel\Adapters\PostgreSqlAdapter;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
 			return match ($driver) {
 				// don't user MsSqlServerAdapter::class, this is a string
 				'sqlsrv' => new MsSqlServerAdapter(),
+				'pgsql' => new PostgreSqlAdapter(),
 				'mysql' => new MySqlAdapter($database),
 				default =>  throw new \Exception("Unsupported DB Driver: {$driver}")
 			};
