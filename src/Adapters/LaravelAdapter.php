@@ -98,16 +98,29 @@ class LaravelAdapter extends Command implements FrameworkPort
 
 	function getAllTables(string $schema): array
 	{
+		$isPsql = $this->dbAdapter instanceof PostgreSqlAdapter;
+
 		try {
 			$results = $this->dbAdapter->selectAllTablesFromSchema($schema);
 
 			// Let's see what we get back
 			$this->info("Raw results:");
 			foreach ($results as $result) {
+				if ($isPsql) {
+					$this->line("Table: " . $result->table_name);
+					continue;
+				}
 				$this->line("Table: " . $result->TABLE_NAME);
 			}
 
 			// Return just the table names
+
+			if ($isPsql) {
+				return array_map(function ($table) {
+					return $table->table_name;
+				}, $results);
+			}
+
 			return array_map(function ($table) {
 				return $table->TABLE_NAME;
 			}, $results);
