@@ -17,12 +17,10 @@
 namespace Gnu\Scaffy\Laravel\Adapters;
 
 use Gnu\Scaffy\Core\Ports\FrameworkPort;
-use Gnu\Scaffy\Core\Helpers\IOHelperCOLUMN_NAME;
+use Gnu\Scaffy\Core\Helpers\IOHelper;
 use Gnu\Scaffy\Laravel\Ports\DatabasePort;
 use Illuminate\Console\Command;
 use Illuminate\Container\Container;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Config\Repository as Config;
 
 
 class LaravelAdapter extends Command implements FrameworkPort
