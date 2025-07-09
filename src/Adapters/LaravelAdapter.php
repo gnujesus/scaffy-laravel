@@ -81,6 +81,9 @@ class LaravelAdapter extends Command implements FrameworkPort
 				$this->info("Generating model for table: {$table}");
 				$this->generateModel($table, $schema);
 			} else {
+				$relations = $this->dbAdapter->getAllRelations();
+				print_r($relations);
+
 				$this->info("Generating models from all tables");
 				$tables = $this->getAllTables($schema);
 				$this->info("Found " . count($tables) . " tables");
@@ -190,6 +193,12 @@ class LaravelAdapter extends Command implements FrameworkPort
 		}
 
 		return $fillable;
+	}
+
+	function getRelations(): array
+	{
+		$relations = $this->dbAdapter->getAllRelations();
+		return $relations;
 	}
 
 	function generateModelContent(string $modelName, string $tableName, array $fillable, string $schema): string

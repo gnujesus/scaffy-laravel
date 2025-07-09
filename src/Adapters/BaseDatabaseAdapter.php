@@ -51,6 +51,33 @@ class BaseDatabaseAdapter implements DatabasePort
 		return $results;
 	}
 
+	// this belongs on postgres, i'll put it here for now.
+
+	public function getAllRelations(): array
+	{
+
+		$query = "
+		SELECT 
+		  kcu.table_name AS source_table,
+		  kcu.column_name AS source_column,
+		  ccu.table_name AS target_table,
+		  ccu.column_name AS target_column
+		FROM 
+		  information_schema.key_column_usage AS kcu
+		JOIN 
+		  information_schema.constraint_column_usage AS ccu
+		  ON kcu.constraint_name = ccu.constraint_name
+		  AND kcu.constraint_schema = ccu.constraint_schema
+		WHERE 
+		  (kcu.constraint_name LIKE '%_foreign%')
+		";
+
+		$results = DB::select($query);
+
+		return $results;
+	}
+
+
 	/* 
 	*
 	* Query to find relations between tables (explained)
