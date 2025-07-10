@@ -14,7 +14,7 @@
             "email": "jotamartinezd@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "gnu/scaffy-core": "^1.1",
         "illuminate/support": "^12.0",
