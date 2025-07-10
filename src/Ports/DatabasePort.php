@@ -12,4 +12,5 @@ interface DatabasePort
 {
 	function selectAllTablesFromSchema(string $customSchema): array;
 	function selectAllTableColumnsFromSchema(string $tableName): array;
+	function getAllRelations(): array;
 }
